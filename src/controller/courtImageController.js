@@ -1,5 +1,6 @@
 const multer = require("multer");
 const path = require("path");
+const model = require('../models/index')
 
 // Cấu hình nơi lưu trữ ảnh
 const storage = multer.diskStorage({
@@ -34,14 +35,14 @@ const uploadCourtImage = async (req, res) => {
         const imageUrl = `/uploads/${req.file.filename}`; // Đường dẫn ảnh
 
         // Lưu vào database
-        const newImage = await CourtImage.create({
+        const newImage = await model.CourtImage.create({
             court_id,
             image_url: imageUrl
         });
 
         res.status(201).json({ message: "Upload ảnh thành công!", newImage });
     } catch (error) {
-        res.status(500).json({ message: "Lỗi upload ảnh!", error });
+        res.status(500).json({ message: "Lỗi upload ảnh!", error: error.message });
     }
 };
 

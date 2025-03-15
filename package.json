@@ -31,5 +31,6 @@
   },
   "devDependencies": {
     "nodemon": "^3.1.9"
-  }
+  },
+  "sequelize": "npx sequelize-cli --config src/config/config.json --migrations-path src/migrations --models-path src/models --seeders-path src/seeders"
 }

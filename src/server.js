@@ -10,6 +10,8 @@ const models = require('./models'); // Import tất cả model
 const userRoutes = require('./routes/userRoutes');
 const courtRoutes = require('./routes/courtRouter')
 const uploadRoutes = require('./routes/uploadRouter');
+const reviewRouter = require("./routes/reviewRouter")
+const bookingRoutes = require("./routes/bookingRouter");
 
 const app = express()
 const port = process.env.PORT || 2502;
@@ -27,7 +29,7 @@ sequelize.authenticate()
 
 async function syncDatabase() {
     try {
-        await sequelize.sync({ force: true }); // Dùng { force: true } nếu muốn xóa & tạo lại bảng
+        await sequelize.sync({ alter: true }); // Dùng { force: true } nếu muốn xóa & tạo lại bảng
         console.log('✅ Database đã được đồng bộ!');
     } catch (error) {
         console.error('❌ Lỗi đồng bộ hóa database:', error);
@@ -48,6 +50,8 @@ const options = {
 app.use('/', userRoutes);
 app.use('/', courtRoutes);
 app.use('/', uploadRoutes);
+app.use('/', reviewRouter);
+app.use('/', bookingRoutes)
 
 app.listen(port, hostname, () => {
     console.log(`server running on {`, hostname, ',', port, '}');
