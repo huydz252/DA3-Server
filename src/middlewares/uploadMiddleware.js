@@ -2,7 +2,7 @@ const multer = require("multer");
 const path = require("path");
 
 const fs = require("fs");
-const uploadDir = "uploads/";
+const uploadDir = "src/uploads/";
 
 // Kiểm tra và tạo thư mục nếu chưa tồn tại
 if (!fs.existsSync(uploadDir)) {
@@ -14,7 +14,7 @@ if (!fs.existsSync(uploadDir)) {
 // Cấu hình lưu trữ file
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, "uploads/"); // Lưu file vào thư mục uploads/
+        cb(null, "src/uploads/"); // Lưu file vào thư mục uploads/
     },
     filename: function (req, file, cb) {
         cb(null, file.originalname); // giữ nguyên tên file

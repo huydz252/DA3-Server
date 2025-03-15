@@ -5,7 +5,7 @@ const model = require('../models/index')
 // Cấu hình nơi lưu trữ ảnh
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, "uploads/"); // Lưu file vào thư mục uploads
+        cb(null, "src/uploads/"); // Lưu file vào thư mục uploads
     },
     filename: (req, file, cb) => {
         cb(null, file.originalname); // Giữ nguyên tên file gốc
@@ -32,7 +32,7 @@ const uploadCourtImage = async (req, res) => {
             return res.status(400).json({ message: "Vui lòng chọn file ảnh!" });
         }
 
-        const imageUrl = `/uploads/${req.file.filename}`; // Đường dẫn ảnh
+        const imageUrl = `src/uploads/${req.file.filename}`; // Đường dẫn ảnh
 
         // Lưu vào database
         const newImage = await model.CourtImage.create({
